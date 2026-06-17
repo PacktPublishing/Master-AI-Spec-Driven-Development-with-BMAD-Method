@@ -1,0 +1,217 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Background & Surfaces */
+    --background: 0 0% 98%;
+    --foreground: 240 10% 10%;
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 10%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 10%;
+
+    /* Primary - Slate/Professional */
+    --primary: 240 6% 20%;
+    --primary-foreground: 0 0% 100%;
+
+    /* Secondary */
+    --secondary: 240 5% 96%;
+    --secondary-foreground: 240 6% 20%;
+
+    /* Muted */
+    --muted: 240 5% 96%;
+    --muted-foreground: 240 4% 46%;
+
+    /* Accent */
+    --accent: 240 5% 92%;
+    --accent-foreground: 240 6% 20%;
+
+    /* Revenue/Money - Emerald */
+    --revenue: 160 84% 39%;
+    --revenue-foreground: 0 0% 100%;
+    --revenue-muted: 160 40% 95%;
+
+    /* Timer/Active - Amber */
+    --timer: 38 92% 50%;
+    --timer-foreground: 0 0% 0%;
+    --timer-muted: 38 100% 95%;
+    --timer-pulse: 38 92% 60%;
+
+    /* Billable indicator */
+    --billable: 160 84% 39%;
+    --non-billable: 240 4% 60%;
+
+    /* Priority colors */
+    --priority-high: 0 84% 60%;
+    --priority-medium: 38 92% 50%;
+    --priority-low: 220 14% 70%;
+
+    /* Destructive */
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    /* Border & Input */
+    --border: 240 6% 90%;
+    --input: 240 6% 90%;
+    --ring: 240 6% 20%;
+
+    --radius: 0.625rem;
+
+    /* Kanban specific */
+    --column-bg: 240 5% 96%;
+    --column-header: 240 6% 20%;
+    --task-card: 0 0% 100%;
+    --task-card-hover: 0 0% 99%;
+    --drag-overlay: 0 0% 100%;
+
+    /* Sidebar */
+    --sidebar-background: 0 0% 100%;
+    --sidebar-foreground: 240 5% 26%;
+    --sidebar-primary: 240 6% 10%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 5% 96%;
+    --sidebar-accent-foreground: 240 6% 10%;
+    --sidebar-border: 240 6% 92%;
+    --sidebar-ring: 240 6% 20%;
+  }
+
+  .dark {
+    --background: 240 10% 6%;
+    --foreground: 0 0% 95%;
+    --card: 240 10% 9%;
+    --card-foreground: 0 0% 95%;
+    --popover: 240 10% 9%;
+    --popover-foreground: 0 0% 95%;
+
+    --primary: 0 0% 95%;
+    --primary-foreground: 240 10% 6%;
+
+    --secondary: 240 6% 15%;
+    --secondary-foreground: 0 0% 95%;
+
+    --muted: 240 6% 15%;
+    --muted-foreground: 240 5% 60%;
+
+    --accent: 240 6% 18%;
+    --accent-foreground: 0 0% 95%;
+
+    --revenue: 160 72% 45%;
+    --revenue-foreground: 0 0% 100%;
+    --revenue-muted: 160 30% 15%;
+
+    --timer: 38 92% 55%;
+    --timer-foreground: 0 0% 0%;
+    --timer-muted: 38 50% 15%;
+    --timer-pulse: 38 92% 65%;
+
+    --billable: 160 72% 45%;
+    --non-billable: 240 5% 50%;
+
+    --priority-high: 0 72% 55%;
+    --priority-medium: 38 92% 55%;
+    --priority-low: 220 10% 50%;
+
+    --destructive: 0 62% 45%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 240 6% 20%;
+    --input: 240 6% 20%;
+    --ring: 0 0% 80%;
+
+    --column-bg: 240 8% 10%;
+    --column-header: 0 0% 90%;
+    --task-card: 240 10% 12%;
+    --task-card-hover: 240 10% 14%;
+    --drag-overlay: 240 10% 14%;
+
+    --sidebar-background: 240 10% 8%;
+    --sidebar-foreground: 240 5% 80%;
+    --sidebar-primary: 0 0% 100%;
+    --sidebar-primary-foreground: 240 10% 6%;
+    --sidebar-accent: 240 6% 15%;
+    --sidebar-accent-foreground: 0 0% 95%;
+    --sidebar-border: 240 6% 18%;
+    --sidebar-ring: 0 0% 80%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+}
+
+@layer utilities {
+  /* Timer pulse animation */
+  .timer-pulse {
+    animation: timer-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  @keyframes timer-pulse {
+    0%, 100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.7;
+    }
+  }
+
+  /* Revenue glow */
+  .revenue-glow {
+    box-shadow: 0 0 20px -5px hsl(var(--revenue) / 0.4);
+  }
+
+  /* Smooth drag feedback */
+  .dragging {
+    @apply opacity-50 scale-105;
+    box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+  }
+
+  /* Task card hover */
+  .task-card-hover {
+    @apply transition-all duration-200;
+  }
+
+  .task-card-hover:hover {
+    @apply shadow-md -translate-y-0.5;
+  }
+
+  /* Column scroll */
+  .column-scroll {
+    scrollbar-width: thin;
+    scrollbar-color: hsl(var(--border)) transparent;
+  }
+
+  .column-scroll::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  .column-scroll::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .column-scroll::-webkit-scrollbar-thumb {
+    background-color: hsl(var(--border));
+    border-radius: 3px;
+  }
+
+  /* Billable badge */
+  .billable-badge {
+    @apply inline-flex items-center gap-1 text-xs font-medium px-1.5 py-0.5 rounded;
+    background: hsl(var(--revenue-muted));
+    color: hsl(var(--revenue));
+  }
+
+  .non-billable-badge {
+    @apply inline-flex items-center gap-1 text-xs font-medium px-1.5 py-0.5 rounded;
+    background: hsl(var(--muted));
+    color: hsl(var(--muted-foreground));
+  }
+}
